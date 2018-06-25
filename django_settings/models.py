@@ -9,7 +9,7 @@ else:
     from django.contrib.contenttypes import generic as generic_fields
 from django.utils.translation import ugettext_lazy as _
 from django.dispatch import receiver
-from django.db.models.signals import post_syncdb
+from django.db.models.signals import post_migrate
 
 # app local
 from . import conf
@@ -114,7 +114,7 @@ registry.register(PositiveInteger)
 # end ###################
 
 
-@receiver(post_syncdb)
+@receiver(post_migrate)
 def handle_post_syncdb(sender, **kwargs):
     from django_settings.dataapi import initialize_data
     initialize_data()
